@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
-import { eventKey } from './keys';
 
 function App() {
 
   const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState([]);
 
   //We only want to fetch data when the component mounts. 
   //That’s why we provide an empty array as second argument 
@@ -38,16 +38,25 @@ function App() {
   }, []);
 
   const categoryItems = categories.map((item, key) =>
-        <li className="grow pointer" key={key}>
-            {item.name}
-        </li>
-    );
+        <option value={item.name} key={key}>{item.name}</option>
+  );
+
+  const categorySelect = (value) => {
+    console.log('value', value)
+    setCategory(value)
+  }
 
   return (
     <div>
       <header className="App-header">
         <p>Don't miss your next great event.</p>
-        {categories ? <ul> {categoryItems} </ul> : null}
+        {categories 
+          ? <select name="categories" 
+              form="category-form"
+              onChange={e => categorySelect(e.target.value)}> 
+              {categoryItems}
+            </select> 
+          : null}
       </header>
     </div>
   );
