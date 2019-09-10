@@ -1,10 +1,9 @@
 import React from 'react';
-import './App.css';
 
 function categorySelector( {categories, categorySelect} ) {
 
     const categoryItems = categories.map((item, key) =>
-        <option value={item.name} key={key}>{item.name}</option>
+        <option value={item.id} key={key}>{item.name}</option>
     );
     
     return(

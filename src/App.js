@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
-import Header from './Header';
-import CategorySelector from './CategorySelector';
-import CityInput from './CityInput';
+
+import Header from './components/Header';
+import CategorySelector from './components/CategorySelector';
+import CityInput from './components/CityInput';
+import SearchEvent from './components/SearchEvent';
 
 function App() {
 
@@ -47,7 +49,7 @@ function App() {
   }
 
   const updateCity = (value) => {
-    console.log('value',value)
+    console.log('value', value)
     setCity(value)
 }
 
@@ -56,6 +58,7 @@ function App() {
         <Header/>
         <CategorySelector categories={categories} categorySelect={categorySelect}/>
         <CityInput city={city} updateCity={updateCity}/>
+        <SearchEvent category={category} city={city}/>
     </div>
   );
 }
