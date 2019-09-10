@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
+import Header from './Header';
+import CategorySelector from './CategorySelector';
+import CityInput from './CityInput';
 
 function App() {
 
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState([]);
+  const [ city, setCity ] = useState('');
 
   //We only want to fetch data when the component mounts. 
   //That’s why we provide an empty array as second argument 
@@ -37,27 +41,21 @@ function App() {
     })
   }, []);
 
-  const categoryItems = categories.map((item, key) =>
-        <option value={item.name} key={key}>{item.name}</option>
-  );
-
   const categorySelect = (value) => {
-    console.log('value', value)
+    console.log('category:', value)
     setCategory(value)
   }
 
+  const updateCity = (value) => {
+    console.log('value',value)
+    setCity(value)
+}
+
   return (
-    <div>
-      <header className="App-header">
-        <p>Don't miss your next great event.</p>
-        {categories 
-          ? <select name="categories" 
-              form="category-form"
-              onChange={e => categorySelect(e.target.value)}> 
-              {categoryItems}
-            </select> 
-          : null}
-      </header>
+    <div className="App-header">
+        <Header/>
+        <CategorySelector categories={categories} categorySelect={categorySelect}/>
+        <CityInput city={city} updateCity={updateCity}/>
     </div>
   );
 }
