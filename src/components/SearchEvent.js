@@ -5,9 +5,8 @@ function SearchEvent( {category, city} ) {
     
     const searchClick= () => {
         console.log('seach', category, city)
-        axios.get(`http://localhost:3000/events`, {
-             category_id: category, location: city
-        }).then(response => {
+        axios.get(`http://localhost:3000/events/${category}&${city}`)
+        .then(response => {
             if(response.status === 200){
                 console.log('response', response.data)                
             }

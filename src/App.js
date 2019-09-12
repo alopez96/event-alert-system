@@ -44,12 +44,10 @@ function App() {
   }, []);
 
   const categorySelect = (value) => {
-    console.log('category:', value)
     setCategory(value)
   }
 
   const updateCity = (value) => {
-    console.log('value', value)
     setCity(value)
 }
 
