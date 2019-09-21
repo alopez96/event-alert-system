@@ -6,12 +6,14 @@ import Header from './components/Header';
 import CategorySelector from './components/CategorySelector';
 import CityInput from './components/CityInput';
 import SearchEvent from './components/SearchEvent';
+import Event from './components/Event';
 
 function App() {
 
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState([]);
   const [ city, setCity ] = useState('');
+  const [ data, setData ] = useState([]);
 
   //We only want to fetch data when the component mounts. 
   //That’s why we provide an empty array as second argument 
@@ -21,7 +23,6 @@ function App() {
     axios.get(`http://localhost:3000/categories`)
     .then(response => {
         if(response.status === 200){
-            console.log('response', response.data)
             setCategories(response.data)
         }
     })
@@ -49,14 +50,23 @@ function App() {
 
   const updateCity = (value) => {
     setCity(value)
-}
+  }
+
+  const updateData = (value) => {
+    setData(value)
+  }
 
   return (
     <div className="App-header">
         <Header/>
         <CategorySelector categories={categories} categorySelect={categorySelect}/>
         <CityInput city={city} updateCity={updateCity}/>
-        <SearchEvent category={category} city={city}/>
+        <SearchEvent category={category} city={city} updateData={updateData}/>
+        {(data.length > 0) 
+        ? <Event data={data}></Event>
+        : null
+        }
+        
     </div>
   );
 }

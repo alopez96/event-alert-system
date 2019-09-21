@@ -9,11 +9,14 @@ function categorySelector( {categories, categorySelect} ) {
     return(
         <div>
             {categories 
-          ? <select name="categories" 
+          ?<div> 
+          <label>Find event using category</label>
+          <select name="categories"
               form="category-form"
               onChange={e => categorySelect(e.target.value)}> 
               {categoryItems}
             </select> 
+            </div>
           : null}
         </div>
     )
