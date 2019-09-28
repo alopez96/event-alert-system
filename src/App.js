@@ -6,14 +6,15 @@ import Header from './components/Header';
 import CategorySelector from './components/CategorySelector';
 import CityInput from './components/CityInput';
 import SearchEvent from './components/SearchEvent';
-import Event from './components/Event';
+import Events from './components/Events';
 
 function App() {
-
+  
   const [categories, setCategories] = useState([]);
   const [category, setCategory] = useState([]);
   const [ city, setCity ] = useState('');
   const [ data, setData ] = useState([]);
+  const [ paginationData, setPagination ] = useState([]);
 
   //We only want to fetch data when the component mounts. 
   //That’s why we provide an empty array as second argument 
@@ -56,14 +57,22 @@ function App() {
     setData(value)
   }
 
+  const updatePagination = (value) => {
+    setPagination(value)
+  }
+
   return (
     <div className="App-header">
         <Header/>
         <CategorySelector categories={categories} categorySelect={categorySelect}/>
         <CityInput city={city} updateCity={updateCity}/>
-        <SearchEvent category={category} city={city} updateData={updateData}/>
+        <SearchEvent category={category} city={city} 
+          updateData={updateData}
+          updatePagination={updatePagination}/>
         {(data.length > 0) 
-        ? <Event data={data}></Event>
+        ? <div>
+          <Events data={data} paginationData={paginationData}></Events>
+        </div>
         : null
         }
         

@@ -8,7 +8,7 @@ function categorySelector( {categories, categorySelect} ) {
     
     return(
         <div>
-            {categories 
+          {categories 
           ?<div> 
           <label>Find event using category</label>
           <select name="categories"
