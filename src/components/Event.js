@@ -1,17 +1,61 @@
 import React, { useEffect } from 'react';
 
-function Event({ data }){
+function Event({ data, paginationData }){
 
     useEffect(() => {
         console.log('event', data)
+        listLength = paginationData.object_count;
+        list = data.events;
+        load();
       });
-
 
     return(
         <div>
-            <p></p>
+            <p>Event object</p>
         </div>
     )
 }
 
 export default Event;
+
+
+
+//Pagination data and calculations
+//source: https://www.thatsoftwaredude.com/content/6125/how-to-paginate-through-a-collection-in-javascript
+var listLength = 0;
+var list = [];              //store data in list
+var pageList = [];          //data that will show per screen
+var currentPage = 1;
+var numberPerPage = 20;     //number of items per page
+var numberOfPages = 1;      // calculates the total number of pages
+
+function load(){
+    numberOfPages = getNumberOfPages();
+    console.log('num of pages', numberOfPages)
+}
+
+function getNumberOfPages() {
+    return Math.ceil(listLength / numberPerPage);
+}
+
+function nextPage() {
+    currentPage += 1;
+    loadList();
+}
+
+function firstPage() {
+    currentPage = 1;
+    loadList();
+}
+
+function lastPage() {
+    currentPage = numberOfPages;
+    loadList();
+}
+
+function loadList() {
+    var begin = ((currentPage - 1) * numberPerPage);
+    var end = begin + numberPerPage;
+
+    pageList = list.slice(begin, end);
+}

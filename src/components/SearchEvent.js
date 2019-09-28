@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-function SearchEvent( {category, city, updateData} ) {
+function SearchEvent( {category, city, updateData, updatePagination} ) {
     
     const searchClick= () => {
         console.log('search', city, category)
@@ -9,7 +9,7 @@ function SearchEvent( {category, city, updateData} ) {
         .then(response => {
             if(response.status === 200){
                 //pagination info
-                console.log('pagination', response.data.pagination)
+                updatePagination(response.data.pagination)
                 updateData(response.data.events)                
             }
         }).catch(err => {
