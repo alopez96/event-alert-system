@@ -13,7 +13,7 @@ function Events({ data, paginationData }){
     const eventItems = data.map((event, key) => {
         return(
             <div key={key}>
-                {event.description.text}
+                <Event event={event}/>
             </div>
         )}
     );
