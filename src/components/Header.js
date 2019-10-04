@@ -4,7 +4,7 @@ function Header () {
 
     return(
         <header>
-            <p>Don't miss your next great event.</p>
+            <p>Don't miss your next great event!</p>
         </header>
     );
 }

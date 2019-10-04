@@ -11,7 +11,7 @@ import Events from './components/Events';
 function App() {
   
   const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState([]);
+  const [category, setCategory] = useState('');
   const [ city, setCity ] = useState('');
   const [ data, setData ] = useState([]);
   const [ paginationData, setPagination ] = useState([]);
@@ -65,11 +65,16 @@ function App() {
     <div className="App-header">
         <Header/>
         <CategorySelector categories={categories} categorySelect={categorySelect}/>
-        <CityInput city={city} updateCity={updateCity}/>
+        {category.length > 0
+        ?<CityInput city={city} updateCity={updateCity}/>
+        : null}
+        {city.length > 0
+        ?
         <SearchEvent category={category} city={city} 
           updateData={updateData}
           updatePagination={updatePagination}/>
-        {(data.length > 0) 
+        : null}
+        {(data.length > 0)
         ? <div>
           <Events data={data} paginationData={paginationData}></Events>
         </div>
