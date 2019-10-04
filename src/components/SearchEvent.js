@@ -19,7 +19,10 @@ function SearchEvent( {category, city, updateData, updatePagination} ) {
 
     return(
         <div>
-            <button onClick={()=>searchClick()}>Search</button>
+            <button className='f6 link dim ph3 pv2 mb2 dib white bg-black' 
+                onClick={()=>searchClick()}>
+                Search
+            </button>
         </div>
     )
 }

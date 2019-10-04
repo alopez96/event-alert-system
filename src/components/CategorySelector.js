@@ -8,10 +8,10 @@ function categorySelector( {categories, categorySelect} ) {
     
     return(
         <div>
-          {categories 
-          ?<div> 
-          <label>Find event using category</label>
-          <select name="categories"
+          {categories.length > 0
+          ?<div className='w-100 dt'>
+          <label className='dtc ma2'>Find event using category</label>
+          <select name="categories" className='dtc ma2'
               form="category-form"
               onChange={e => categorySelect(e.target.value)}> 
               {categoryItems}

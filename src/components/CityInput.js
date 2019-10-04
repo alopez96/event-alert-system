@@ -5,8 +5,9 @@ function CityInput({ city, updateCity }) {
 
     return(
         <div>
-            <label>Enter city</label>
-            <input value={city} onChange={e => updateCity(e.target.value)}></input>
+            <label className='ma2'>Enter city</label>
+            <input className='ma2' value={city} 
+            onChange={e => updateCity(e.target.value)}></input>
         </div>
     )
 }
