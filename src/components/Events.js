@@ -10,7 +10,7 @@ function Events({ data, paginationData }){
         load();
       });
 
-    const eventItems = data.map((event, key) => {
+    const eventItems = pageList.map((event, key) => {
         return(
             <div key={key}>
                 <Event event={event}/>
@@ -20,7 +20,11 @@ function Events({ data, paginationData }){
 
     return(
         <div>
-            {eventItems}
+            {pageList.length > 0
+            ?<div>
+                {eventItems}
+            </div>
+            :null}
             <button onClick={()=>firstPage()}>First</button>
             <button onClick={()=>nextPage()}>Next</button>
             <button onClick={()=>prevPage()}>Previous</button>
@@ -44,7 +48,8 @@ var numberOfPages = 1;      // calculates the total number of pages
 
 function load(){
     numberOfPages = getNumberOfPages();
-    console.log('num of pages', numberOfPages)
+    console.log('num of pages', numberOfPages);
+    loadList();
 }
 
 function getNumberOfPages() {
@@ -76,4 +81,6 @@ function loadList() {
     var end = begin + numberPerPage;
 
     pageList = list.slice(begin, end);
+    console.log('pagelist', pageList)
+    console.log('pagelist length', pageList.length)
 }
