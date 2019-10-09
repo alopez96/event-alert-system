@@ -5,16 +5,23 @@ import Event from './Event';
 function Events({ data, paginationData }){
 
     const [pageList, setPageList] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
     const [listLength , setListLength] = useState(0);
 
-    var numberOfPages = 0;
     const numberPerPage = 4;
 
     useEffect(() => {
         console.log('data', data);
-        setListLength(paginationData.object_count);
-        load();
+        //object count gives the total number of items
+        //data returned from api request has array max of 49 objects
+        //if we have more than 49 pages, set the max to 49
+        if((paginationData.object_count/numberPerPage) > 49){
+            setListLength(49);    
+        }
+        else{
+            setListLength(paginationData.object_count);
+        }
+        loadList();
       }, []);
 
     const getNumberOfPages = () => {
@@ -27,36 +34,39 @@ function Events({ data, paginationData }){
     }
 
     const nextPage = (current) => {
-        setCurrentPage(current + 1);
-        loadList();
+        //if we are last page - do nothing      
+        if(current == getNumberOfPages())
+            return;
+        else{
+            setCurrentPage(current + 1);
+            loadList();
+        }
     }
 
     const prevPage = (current) => {
-        setCurrentPage(current - 1);
-        loadList();
+        //if we are in first page - do nothing
+        if(current == 1){
+            return;
+        }
+        else{
+            setCurrentPage(current - 1);
+            loadList();
+        }
     }
 
-    const lastPage = () => {
+    const lastPage = () => { 
         setCurrentPage(getNumberOfPages());
-        loadList();
-    }
-
-    const load = () => {
-        numberOfPages = getNumberOfPages();
-        console.log('num of pages', numberOfPages);
         loadList();
     }
 
     const loadList = () => {
         let begin = ((currentPage - 1) * numberPerPage);
         let end = begin + numberPerPage;
-
-        setPageList(data.slice(begin, end));
-        console.log('pagelist', pageList);
-        console.log('pagelist length', pageList.length);
+        const newData = data.slice(begin,end);
+        setPageList(newData);   
     }
 
-    const eventItems = pageList.map((event, key) => {
+    var eventItems = pageList.map((event, key) => {
         return(
             <div key={key}>
                 <Event event={event}/>
@@ -66,9 +76,10 @@ function Events({ data, paginationData }){
 
     return(
         <div>
-            {pageList.length > 0
+            {pageList.length > 0 && currentPage
             ?<div>
                 {eventItems}
+                {currentPage}
             </div>
             :null}
             <button

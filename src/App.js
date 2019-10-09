@@ -58,6 +58,7 @@ function App() {
   }
 
   const updatePagination = (value) => {
+    console.log('pagination updated', value)
     setPagination(value)
   }
 
