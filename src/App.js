@@ -74,12 +74,11 @@ function App() {
           updateData={updateData}
           updatePagination={updatePagination}/>
         : null}
-        {(data.length > 0)
-        ? <div>
-          <Events data={data} paginationData={paginationData}></Events>
+        {data.length > 0
+        ?<div>
+          <Events data={data} paginationData={paginationData}/>
         </div>
-        : null
-        }
+        : null}
         
     </div>
   );

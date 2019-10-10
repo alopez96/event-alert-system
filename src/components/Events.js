@@ -12,16 +12,27 @@ function Events({ data, paginationData }){
 
     const numberPerPage = 4;
 
+    //component did mount
+    //loadList when component first mounts
     useEffect(() => {
         console.log('data', data);
         setLength();
         loadList();
-      }, []);
+    }, []);
 
-      //load new page on page change
-      useEffect(() => {
-        loadList()
-      }, [currentPage]);
+    //load new page on currentPage change
+    useEffect(() => {
+    loadList();
+    }, [currentPage]);
+
+    
+    //get new data if (data) props changes
+    useEffect(() => {
+        let begin = ((currentPage - 1) * numberPerPage);
+        let end = begin + numberPerPage;
+        const newData = data.slice(begin,end);
+        setPageList(newData);
+    },[data]);
 
     //result: listLength hook is updated
     const setLength = () => {
@@ -52,7 +63,7 @@ function Events({ data, paginationData }){
     //result: currentPage hook is updated
     const nextPage = (current) => {
         //if we are last page - do nothing      
-        if(current == getNumberOfPages())
+        if(current === getNumberOfPages())
             return;
         else{
             setCurrentPage(current + 1);
@@ -63,7 +74,7 @@ function Events({ data, paginationData }){
     //result: currentPage hook is updated
     const prevPage = (current) => {
         //if we are in first page - do nothing
-        if(current == 1){
+        if(current === 1){
             return;
         }
         else{
