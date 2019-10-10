@@ -57,8 +57,7 @@ function App() {
     setData(value)
   }
 
-  const updatePagination = (value) => {
-    console.log('pagination updated', value)
+  const updatePagination = (value) => {    
     setPagination(value)
   }
 

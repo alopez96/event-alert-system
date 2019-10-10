@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Event from './Event';
 
+//macro for setting max length of array
+const MAX_LEN = 49;
 
 function Events({ data, paginationData }){
 
@@ -12,37 +14,53 @@ function Events({ data, paginationData }){
 
     useEffect(() => {
         console.log('data', data);
+        setLength();
+        loadList();
+      }, []);
+
+      //load new page on page change
+      useEffect(() => {
+        loadList()
+      }, [currentPage]);
+
+    //result: listLength hook is updated
+    const setLength = () => {
         //object count gives the total number of items
         //data returned from api request has array max of 49 objects
-        //if we have more than 49 pages, set the max to 49
-        if((paginationData.object_count/numberPerPage) > 49){
-            setListLength(49);    
+        //if we have more than 49 items, set the max to 49
+        if((paginationData.object_count) > MAX_LEN){
+            setListLength(MAX_LEN);    
         }
         else{
             setListLength(paginationData.object_count);
         }
-        loadList();
-      }, []);
+    }
 
+    //method to return number of pages
     const getNumberOfPages = () => {
         return Math.ceil(listLength / numberPerPage);
     }
 
+    //set page to first
+    //result: currentPage hook is updated
     const firstPage = () => {
         setCurrentPage(1);
         loadList();
     }
 
+    //increment page by 1
+    //result: currentPage hook is updated
     const nextPage = (current) => {
         //if we are last page - do nothing      
         if(current == getNumberOfPages())
             return;
         else{
             setCurrentPage(current + 1);
-            loadList();
         }
     }
 
+    //decrement page by 1
+    //result: currentPage hook is updated
     const prevPage = (current) => {
         //if we are in first page - do nothing
         if(current == 1){
@@ -50,33 +68,35 @@ function Events({ data, paginationData }){
         }
         else{
             setCurrentPage(current - 1);
-            loadList();
         }
     }
 
+    //go to last page
+    //result: currentPage hook is updated
     const lastPage = () => { 
         setCurrentPage(getNumberOfPages());
-        loadList();
     }
 
+    //method to load new list
+    //result: pageList hook is updated
     const loadList = () => {
         let begin = ((currentPage - 1) * numberPerPage);
         let end = begin + numberPerPage;
         const newData = data.slice(begin,end);
-        setPageList(newData);   
+        setPageList(newData);
     }
 
-    var eventItems = pageList.map((event, key) => {
+    const eventItems = pageList.map((event, key) => {        
         return(
             <div key={key}>
                 <Event event={event}/>
             </div>
-        )}
-    );
+        )
+    });
 
     return(
         <div>
-            {pageList.length > 0 && currentPage
+            {pageList.length > 0
             ?<div>
                 {eventItems}
                 {currentPage}
@@ -87,10 +107,10 @@ function Events({ data, paginationData }){
                 onClick={()=>firstPage()}>First</button>
             <button 
                 className='f6 link dim ph3 pv2 mb2 dib white bg-black'
-                onClick={()=>nextPage(currentPage)}>Next</button>
+                onClick={()=>prevPage(currentPage)}>Previous</button>
             <button 
                 className='f6 link dim ph3 pv2 mb2 dib white bg-black'
-                onClick={()=>prevPage(currentPage)}>Previous</button>
+                onClick={()=>nextPage(currentPage)}>Next</button>
             <button
                 className='f6 link dim ph3 pv2 mb2 dib white bg-black'
                 onClick={()=>lastPage()}>Last</button>
