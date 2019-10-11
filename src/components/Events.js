@@ -110,7 +110,9 @@ function Events({ data, paginationData }){
             {pageList.length > 0
             ?<div>
                 {eventItems}
-                {currentPage}
+                <div className='mb3'>
+                    {currentPage}
+                </div>
             </div>
             :null}
             <button
