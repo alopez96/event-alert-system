@@ -13,21 +13,21 @@ function Events({ data, paginationData }){
     const numberPerPage = 4;
 
     //component did mount
-    //loadList when component first mounts
+    //set length and log data props
     useEffect(() => {
         console.log('data', data);
         setLength();
-        loadList();
     }, []);
 
     //load new page on currentPage change
     useEffect(() => {
-    loadList();
+        loadList();
     }, [currentPage]);
 
     
     //get new data if (data) props changes
     useEffect(() => {
+        console.log('useeffect')
         let begin = ((currentPage - 1) * numberPerPage);
         let end = begin + numberPerPage;
         const newData = data.slice(begin,end);
