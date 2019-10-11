@@ -9,7 +9,7 @@ function categorySelector( {categories, categorySelect} ) {
     return(
         <div>
           {categories.length > 0
-          ?<div className='w-100 dt'>
+          ?<div className='w-50 center dt'>
           <label className='dtc ma2'>Select category</label>
           <select name="categories" className='dtc ma2'
               form="category-form"

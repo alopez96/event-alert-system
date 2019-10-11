@@ -4,7 +4,7 @@ function CityInput({ city, updateCity }) {
     
 
     return(
-        <div className='w-100 dt'>
+        <div className='w-50 center dt'>
             <label className='ma2 dtc'>Enter city</label>
             <input className='ma2 dtc' value={city} 
             onChange={e => updateCity(e.target.value)}></input>

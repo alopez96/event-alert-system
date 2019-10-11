@@ -18,7 +18,7 @@ function Event ({ event }) {
             </div>
             <div className='dt w-50 center'>
                 <div>
-                <a className='dtc f5 link dim ph3 pv3 mb2 ml7 dib white bg-black' 
+                <a className='dtc f5 link dim ph3 pv2 mb2 dib white bg-black' 
                     href={event.url}>
                     Register
                 </a>
