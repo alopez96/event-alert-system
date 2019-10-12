@@ -1,4 +1,5 @@
 import React from 'react';
+import './../App.css';
 
 function categorySelector( {categories, categorySelect} ) {
 
@@ -11,7 +12,7 @@ function categorySelector( {categories, categorySelect} ) {
           {categories.length > 0
           ?<div className='w-50 center dt'>
           <label className='dtc ma2'>Select category</label>
-          <select name="categories" className='dtc ma2'
+          <select name="categories" className='dtc ma2 category-select'
               form="category-form"
               onChange={e => categorySelect(e.target.value)}> 
               {categoryItems}

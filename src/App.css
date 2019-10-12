@@ -1,7 +1,7 @@
 
 .App-header {
   text-align: center;
-  background-color: #505050;
+  background-color: #282828;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -19,3 +19,18 @@
     transform: rotate(360deg);
   }
 }
+
+.category-select{
+  color: #3500D3;
+  padding: 8px 16px;
+  border: 2px solid transparent;
+}
+
+.purple1{
+  color: #240090;
+}
+
+.purple2{
+  color:#190061;
+}
+
