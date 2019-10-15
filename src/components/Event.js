@@ -3,6 +3,10 @@ import './../App.css';
 
 function Event ({ event }) {
 
+    const openPage = () => {
+        window.open(event.url, '_blank')
+    }
+
     return(
         <div>
             <article className="br2 h-100 ba bg--light-blue b--white-10 mv4 w-50 w-50-m mw8 shadow-5 center">
@@ -19,7 +23,7 @@ function Event ({ event }) {
             <div className='dt w-50 center'>
                 <div>
                 <a className='dtc f5 link dim ph3 pv2 mb2 dib white bg-black' 
-                    href={event.url}>
+                    onClick={()=> openPage()}>
                     Register
                 </a>
             </div>

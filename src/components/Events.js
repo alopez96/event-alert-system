@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Event from './Event';
+import './../App.css';
 
 //macro for setting max length of array
 const MAX_LEN = 49;
 
 function Events({ data, paginationData }){
+
+    let myRef = React.createRef();
+    const useMountEffect = (fun) => useEffect(fun, [])
 
     const [pageList, setPageList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -27,7 +31,6 @@ function Events({ data, paginationData }){
     
     //get new data if (data) props changes
     useEffect(() => {
-        console.log('useeffect')
         let begin = ((currentPage - 1) * numberPerPage);
         let end = begin + numberPerPage;
         const newData = data.slice(begin,end);
@@ -68,6 +71,7 @@ function Events({ data, paginationData }){
         else{
             setCurrentPage(current + 1);
         }
+        gotToTop(myRef);
     }
 
     //decrement page by 1
@@ -105,8 +109,11 @@ function Events({ data, paginationData }){
         )
     });
 
+    const gotToTop = (ref) => window.scrollTo(0, ref.current.offsetTop)  
+
     return(
         <div>
+            <div ref={myRef} style={{height:20}}></div>
             {pageList.length > 0
             ?<div>
                 {eventItems}

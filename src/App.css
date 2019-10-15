@@ -26,11 +26,14 @@
   border: 2px solid transparent;
 }
 
-.purple1{
-  color: #240090;
+.city-input{
+  /* color: #240090; */
+  color: #3500D3;
+  padding: 5px 16px;
+  border: 2px solid transparent;
+  border-radius: 0.4rem;
 }
 
 .purple2{
   color:#190061;
 }
-
