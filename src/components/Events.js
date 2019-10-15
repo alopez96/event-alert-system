@@ -8,13 +8,12 @@ const MAX_LEN = 49;
 function Events({ data, paginationData }){
 
     let myRef = React.createRef();
-    const useMountEffect = (fun) => useEffect(fun, [])
 
     const [pageList, setPageList] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [listLength , setListLength] = useState(0);
 
-    const numberPerPage = 4;
+    const numberPerPage = 5;
 
     //component did mount
     //set length and log data props
@@ -58,8 +57,7 @@ function Events({ data, paginationData }){
     //set page to first
     //result: currentPage hook is updated
     const firstPage = () => {
-        setCurrentPage(1);
-        loadList();
+        setCurrentPage(1);        
     }
 
     //increment page by 1
@@ -68,9 +66,8 @@ function Events({ data, paginationData }){
         //if we are last page - do nothing      
         if(current === getNumberOfPages())
             return;
-        else{
-            setCurrentPage(current + 1);
-        }
+        
+        setCurrentPage(current + 1);
         gotToTop(myRef);
     }
 
@@ -81,9 +78,10 @@ function Events({ data, paginationData }){
         if(current === 1){
             return;
         }
-        else{
-            setCurrentPage(current - 1);
-        }
+        
+        setCurrentPage(current - 1);
+        gotToTop(myRef);
+    
     }
 
     //go to last page
