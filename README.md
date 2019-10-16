@@ -4,22 +4,24 @@
 
 To find this page live visit: https://event-alert-app.netlify.com.
 
-It uses the Meetup API to get events.
+This app was inspired by Medium article by SeattleDataGuy. It uses the Eventbrite API to get events.
 
-It was inspired by Medium article by SeattleDataGuy.
+It is connected to live server hosted on Heroku - GitHub repo: [event-alert-system-api](https://github.com/alopez96/event-alert-system-api).
 
-It is connected to live server hosted on Heroku (GitHub repo: event-alert-system-api).
 
-## React Notes
+The frontend of this project was created with [Create React App](https://github.com/facebook/create-react-app), HTML, and CSS.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation
 
-In the project directory, you can run:
+Git clone this project, and the server code found on [event-alert-system-api](https://github.com/alopez96/event-alert-system-api).
 
-### `npm start`
+## Usage
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+In the project directory, you can run: `npm start` on the server code to get that running.
+
+Then run `npm start` on this project and run app in the development mode.<br>
+
+Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
