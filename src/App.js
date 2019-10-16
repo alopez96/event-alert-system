@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
+import host from './server';
 
 import Header from './components/Header';
 import CategorySelector from './components/CategorySelector';
@@ -21,7 +22,7 @@ function App() {
   //similar to componentDidMount
   useEffect(() => {
     //get list of categories
-    axios.get(`http://localhost:3000/categories`)
+    axios.get(`${host}/categories`)
     .then(response => {
         if(response.status === 200){
             setCategories(response.data)

@@ -1,11 +1,12 @@
 import React from 'react';
 import axios from 'axios';
+import host from './../server';
 
 function SearchEvent( {category, city, updateData, updatePagination} ) {
     
     const searchClick= () => {
         console.log('search', city, category)
-        axios.get(`http://localhost:3000/events/${category}&${city}`)
+        axios.get(`${host}/events/${category}&${city}`)
         .then(response => {
             if(response.status === 200){
                 //pagination info
