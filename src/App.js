@@ -9,6 +9,8 @@ import CityInput from './components/CityInput';
 import SearchEvent from './components/SearchEvent';
 import Events from './components/Events';
 
+import { Spinner } from 'react-bootstrap';
+
 function App() {
   
   const [categories, setCategories] = useState([]);
@@ -16,6 +18,8 @@ function App() {
   const [ city, setCity ] = useState('');
   const [ data, setData ] = useState([]);
   const [ paginationData, setPagination ] = useState([]);
+  const [isLoaded, setisLoaded] = useState(false);
+  const [dataFetched, setDataFetched] = useState(false);
 
   //We only want to fetch data when the component mounts. 
   //That’s why we provide an empty array as second argument 
@@ -26,6 +30,7 @@ function App() {
     .then(response => {
         if(response.status === 200){
             setCategories(response.data)
+            setisLoaded(true);
         }
     })
     .catch( err => {
@@ -62,16 +67,24 @@ function App() {
     setPagination(value)
   }
 
+  const updateDataFetched = (value) => {
+    console.log('data fetched', value)
+    setDataFetched(value);
+  }
+
   return (
     <div className="App-header">
         <Header/>
-        <CategorySelector categories={categories} categorySelect={categorySelect}/>
+        {isLoaded == false
+        ?<Spinner animation="border" variant="primary" className="center"/> 
+        :<CategorySelector categories={categories} categorySelect={categorySelect}/>
+        }
         {category.length > 0
         ?<CityInput city={city} updateCity={updateCity}/>
         : null}
         {city.length > 0
         ?
-        <SearchEvent category={category} city={city} 
+        <SearchEvent category={category} city={city} updateDataFetched={updateDataFetched}
           updateData={updateData}
           updatePagination={updatePagination}/>
         : null}
@@ -79,7 +92,12 @@ function App() {
         ?<div>
           <Events data={data} paginationData={paginationData}/>
         </div>
-        : null}
+        : <div>
+        {dataFetched === true
+        ? <Spinner animation="border" variant="primary" className="center"/> 
+        :null}
+        </div>
+         }
         
     </div>
   );

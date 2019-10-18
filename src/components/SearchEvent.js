@@ -2,10 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import host from './../server';
 
-function SearchEvent( {category, city, updateData, updatePagination} ) {
+function SearchEvent( {category, city, updateData, updatePagination, updateDataFetched} ) {
     
     const searchClick= () => {
         console.log('search', city, category)
+        updateDataFetched(true);
         axios.get(`${host}/events/${category}&${city}`)
         .then(response => {
             if(response.status === 200){
