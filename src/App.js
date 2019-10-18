@@ -18,8 +18,8 @@ function App() {
   const [ city, setCity ] = useState('');
   const [ data, setData ] = useState([]);
   const [ paginationData, setPagination ] = useState([]);
-  const [isLoaded, setisLoaded] = useState(false);
-  const [dataFetched, setDataFetched] = useState(false);
+  const [isLoadedCateg, setisLoadedCateg] = useState(false);
+  const [isLoadingData, setisLoadingData] = useState(false);
 
   //We only want to fetch data when the component mounts. 
   //That’s why we provide an empty array as second argument 
@@ -30,7 +30,7 @@ function App() {
     .then(response => {
         if(response.status === 200){
             setCategories(response.data)
-            setisLoaded(true);
+            setisLoadedCateg(true);
         }
     })
     .catch( err => {
@@ -59,23 +59,28 @@ function App() {
     setCity(value)
   }
 
+  //result: show  data and set isLoadingData to false -> remove spinner
   const updateData = (value) => {
-    setData(value)
+    setData(value);
+    setisLoadingData(false);
   }
 
   const updatePagination = (value) => {    
     setPagination(value)
   }
 
-  const updateDataFetched = (value) => {
-    console.log('data fetched', value)
-    setDataFetched(value);
+  //set data to [] and update isLoadingData to true
+  //result: show spinner (until we get response from SerachEvent.js api call
+  //and we trigger updateData function above)
+  const updateDataFetched = () => {
+    setData([]);
+    setisLoadingData(true);
   }
 
   return (
     <div className="App-header">
         <Header/>
-        {isLoaded == false
+        {isLoadedCateg === false
         ?<Spinner animation="border" variant="primary" className="center"/> 
         :<CategorySelector categories={categories} categorySelect={categorySelect}/>
         }
@@ -93,7 +98,7 @@ function App() {
           <Events data={data} paginationData={paginationData}/>
         </div>
         : <div>
-        {dataFetched === true
+        {isLoadingData === true
         ? <Spinner animation="border" variant="primary" className="center"/> 
         :null}
         </div>

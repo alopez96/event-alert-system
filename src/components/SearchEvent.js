@@ -6,7 +6,11 @@ function SearchEvent( {category, city, updateData, updatePagination, updateDataF
     
     const searchClick= () => {
         console.log('search', city, category)
-        updateDataFetched(true);
+
+        //set data to [] and isLoadingData to true
+        //result: parent: App.js will show spinner
+        updateDataFetched();
+
         axios.get(`${host}/events/${category}&${city}`)
         .then(response => {
             if(response.status === 200){

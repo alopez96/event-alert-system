@@ -22,10 +22,10 @@ function Event ({ event }) {
             </div>
             <div className='dt w-50 center'>
                 <div>
-                <a className='dtc f5 link dim ph3 pv2 mb2 dib white bg-black' 
+                <button className='dtc f5 link dim ph3 pv2 mb2 dib white bg-black' 
                     onClick={()=> openPage()}>
                     Register
-                </a>
+                </button>
             </div>
             <div className='dtc'>
                 <h6>{event.venue.address.city}</h6>
