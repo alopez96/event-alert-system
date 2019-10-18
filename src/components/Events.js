@@ -121,16 +121,16 @@ function Events({ data, paginationData }){
             </div>
             :null}
             <button
-                className='f6 link dim ph3 pv2 mb2 dib white bg-black'
+                className='f6 link dim ph3 pv2 mb2 dib white bg-dark-blue'
                 onClick={()=>firstPage()}>First</button>
             <button 
-                className='f6 link dim ph3 pv2 mb2 dib white bg-black'
+                className='f6 link dim ph3 pv2 mb2 dib white bg-dark-blue'
                 onClick={()=>prevPage(currentPage)}>Previous</button>
             <button 
-                className='f6 link dim ph3 pv2 mb2 dib white bg-black'
+                className='f6 link dim ph3 pv2 mb2 dib white bg-dark-blue'
                 onClick={()=>nextPage(currentPage)}>Next</button>
             <button
-                className='f6 link dim ph3 pv2 mb2 dib white bg-black'
+                className='f6 link dim ph3 pv2 mb2 dib white bg-dark-blue'
                 onClick={()=>lastPage()}>Last</button>
         </div>
     )

@@ -25,7 +25,7 @@ function SearchEvent( {category, city, updateData, updatePagination, updateDataF
 
     return(
         <div>
-            <button className='f6 link dim ph3 pv2 mt2 mb2 dib center white bg-purple' 
+            <button className='f6 link dim ph3 pv2 mt2 mb2 dib center white bg-dark-blue' 
                 onClick={()=>searchClick()}>
                 Search
             </button>

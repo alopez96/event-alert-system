@@ -21,14 +21,15 @@
 }
 
 .category-select{
-  color: #3500D3;
+  /* color: #3500D3; */
+  color: #00449E;
   padding: 8px 16px;
   border: 2px solid transparent;
 }
 
 .city-input{
   /* color: #240090; */
-  color: #3500D3;
+  color: #00449E;
   padding: 5px 16px;
   border: 2px solid transparent;
   border-radius: 0.4rem;
