@@ -115,11 +115,12 @@ function Events({ data, paginationData }){
             {pageList.length > 0
             ?<div>
                 {eventItems}
-                <div className='mb3'>
+                <div className='mb3 text-center'>
                     {currentPage}
                 </div>
             </div>
             :null}
+            <div className='text-center mb5'>
             <button
                 className='f6 link dim ph3 pv2 mb2 dib white bg-dark-blue'
                 onClick={()=>firstPage()}>First</button>
@@ -132,6 +133,7 @@ function Events({ data, paginationData }){
             <button
                 className='f6 link dim ph3 pv2 mb2 dib white bg-dark-blue'
                 onClick={()=>lastPage()}>Last</button>
+            </div>
         </div>
     )
 }
