@@ -2,23 +2,26 @@ import React from 'react';
 import axios from 'axios';
 import host from './../server';
 
-function SearchEvent( {category, city, updateData, updatePagination, updateDataFetched} ) {
+function SearchEvent( {category, city, updateData,
+                     updatePagination, updateError} ) {
     
     const searchClick= () => {
         console.log('search', city, category)
 
         //set data to [] and isLoadingData to true
         //result: parent: App.js will show spinner
-        updateDataFetched();
+        updateData([], true);
 
         axios.get(`${host}/events/${category}&${city}`)
         .then(response => {
             if(response.status === 200){
                 //pagination info
                 updatePagination(response.data.pagination)
-                updateData(response.data.events)                
+                updateData(response.data.events, false)                
             }
         }).catch(err => {
+            updateData([],false)   
+            updateError(err.response.status)
             console.log('error', err)
         })
     }

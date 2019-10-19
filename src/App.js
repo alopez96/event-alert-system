@@ -9,7 +9,7 @@ import CityInput from './components/CityInput';
 import SearchEvent from './components/SearchEvent';
 import Events from './components/Events';
 
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Alert } from 'react-bootstrap';
 
 function App() {
   
@@ -20,6 +20,7 @@ function App() {
   const [ paginationData, setPagination ] = useState([]);
   const [isLoadedCateg, setisLoadedCateg] = useState(false);
   const [isLoadingData, setisLoadingData] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(200);
 
   //We only want to fetch data when the component mounts. 
   //That’s why we provide an empty array as second argument 
@@ -59,12 +60,6 @@ function App() {
     setCity(value)
   }
 
-  //result: show  data and set isLoadingData to false -> remove spinner
-  const updateData = (value) => {
-    setData(value);
-    setisLoadingData(false);
-  }
-
   const updatePagination = (value) => {    
     setPagination(value)
   }
@@ -72,9 +67,13 @@ function App() {
   //set data to [] and update isLoadingData to true
   //result: show spinner (until we get response from SerachEvent.js api call
   //and we trigger updateData function above)
-  const updateDataFetched = () => {
-    setData([]);
-    setisLoadingData(true);
+  const updateData = (data, isLoading) => {
+    setData(data);
+    setisLoadingData(isLoading);
+  }
+
+  const updateError = (status) => {
+    setErrorMessage(status);
   }
 
   return (
@@ -89,9 +88,10 @@ function App() {
         : null}
         {city.length > 0
         ?
-        <SearchEvent category={category} city={city} updateDataFetched={updateDataFetched}
+        <SearchEvent category={category} city={city} 
           updateData={updateData}
-          updatePagination={updatePagination}/>
+          updatePagination={updatePagination}
+          updateError={updateError}/>
         : null}
         {data.length > 0
         ?<div>
@@ -100,7 +100,12 @@ function App() {
         : <div>
         {isLoadingData === true
         ? <Spinner animation="border" variant="primary" className="center"/> 
-        :null}
+        : <div className='mt2'>
+          {errorMessage > 200
+          ?<Alert variant='danger'>Error Fetching Data</Alert>
+          :null}
+        </div>
+        }
         </div>
          }
         
